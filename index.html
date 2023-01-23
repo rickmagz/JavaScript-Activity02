@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JS Activity 02</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <section>
+      <div class="container">
+        <div class="joke">
+          <p>
+            This page says what do you call an alligator in a vest? An
+            in-vest-igator!
+          </p>
+        </div>
+        <button>Generate joke</button>
+      </div>
+    </section>
+    <script>
+      const button = document.querySelector(".container button");
+      const jokeText = document.querySelector(".container p");
+
+      button.addEventListener("click", getJoke);
+
+      async function getJoke() {
+        const jokeData = await fetch("https://icanhazdadjoke.com/", {
+          headers: {
+            Accept: "application/json",
+          },
+        });
+        const jokeObj = await jokeData.json();
+        jokeText.innerHTML = jokeObj.joke;
+      }
+    </script>
+  </body>
+</html>
